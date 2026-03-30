@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Share</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ffffff;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        main {
+            flex: 1; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .card h2 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .fact-box {
+            margin: 1rem 0;
+            padding: 1rem;
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #555;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        button {
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            flex: 1; /* Makes buttons equal width */
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Styling for the secondary Login button */
+        .btn-secondary {
+            background-color: transparent;
+            color: #3498db;
+            border: 2px solid #3498db;
+        }
+
+        .btn-secondary:hover {
+            background-color: #3498db;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #2c3e50;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Food Share</h1>
+    </header>
+    
+    <main>
+        <section class="card">
+            <h2>Hey, Food Saviours!</h2>
+            <p>This is an attempt to save food from being wasted and to feed the hungry. Join our mission today.</p>
+            
+            <div class="fact-box">
+                <span id="fact-display">Loading impact fact...</span>
+            </div>
+
+            <div class="button-group">
+                <button id="login-btn" class="btn-secondary">Log In</button>
+                <button id="signup-btn">Sign Up</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Wait for the HTML to load before running JavaScript
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Navigation Logic
+            const signupBtn = document.getElementById('signup-btn');
+            const loginBtn = document.getElementById('login-btn');
+
+            // Instead of inline onclick, it's better practice to add event listeners in JS
+            signupBtn.addEventListener('click', () => {
+                window.location.href = 'signup.html';
+            });
+
+            loginBtn.addEventListener('click', () => {
+                window.location.href = 'login.html';
+            });
+
+            // 2. Thematic Interactive Logic: Rotating Food Waste Facts
+            const facts = [
+                "Roughly one-third of the food produced in the world for human consumption every year gets lost or wasted.",
+                "Saving just 25% of the food currently wasted globally would be enough to feed 870 million hungry people.",
+                "Food waste generates about 8% of global greenhouse gas emissions.",
+                "Every meal saved is a step towards a sustainable future."
+            ];
+
+            const factDisplay = document.getElementById('fact-display');
+            let currentFactIndex = 0;
+
+            // Display the first fact immediately
+            factDisplay.textContent = facts[currentFactIndex];
+
+            // Change the fact every 6 seconds (6000 milliseconds)
+            setInterval(() => {
+                // Fade out effect (optional, simple implementation)
+                factDisplay.style.opacity = 0;
+                
+                setTimeout(() => {
+                    currentFactIndex = (currentFactIndex + 1) % facts.length;
+                    factDisplay.textContent = facts[currentFactIndex];
+                    factDisplay.style.opacity = 1;
+                }, 300); // Wait 300ms for fade out before changing text
+                
+            }, 6000);
+        });
+    </script>
+</body>
+</html>
